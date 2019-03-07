@@ -61,6 +61,7 @@ RUN echo "---> Enabling PHP-Alpine" && \
     php7-gd@php \
     php7-gmp@php \
     php7-iconv@php \
+    php7-ldap@php \
     php7-imagick@php \
     php7-imap@php \
     php7-intl@php \
