@@ -11,8 +11,6 @@ if [[ -z $TRAVIS ]]; then
     else
        source ./.env.example
     fi
-else
-    USE_CACHE=false;
 fi
 
 
