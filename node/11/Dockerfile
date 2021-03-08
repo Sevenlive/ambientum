@@ -4,7 +4,7 @@
 # Repository:    Node.JS
 # Image:         CLI/Base
 # Version:       11.x.x
-# Strategy:      Based on mhart/alpine-node
+# Strategy:      Based on mhart/alpine-node:11
 # Base distro:   Alpine 3.8
 #
 FROM mhart/alpine-node:11
@@ -21,11 +21,20 @@ ENV NPM_PACKAGES="/home/ambientum/.cache/npm-packages" \
     TERM=xterm-256color \
     COLORTERM=truecolor
 
+# Add the ENTRYPOINT script
+ADD start.sh /scripts/start.sh
+ADD bashrc /home/ambientum/.bashrc
+ADD bashrc /home/bashrc
+
 # Install PHP From DotDeb, Common Extensions, Composer and then cleanup
 RUN echo "---> Installing base dependencies" && \
     apk add --update \
     wget \
     curl \
+    openssh \
+    alpine-sdk \
+    automake \
+    autoconf \
     bash \
     fontconfig \
     libxrender \
@@ -44,23 +53,24 @@ RUN echo "---> Installing base dependencies" && \
     mkdir -p /var/www/app && \
     chown -R ambientum:ambientum /var/www && \
     echo "ambientum  ALL = ( ALL ) NOPASSWD: ALL" >> /etc/sudoers && \
-    wget -O /tini https://github.com/krallin/tini/releases/download/v0.16.1/tini-static && \
+    wget -O /tini https://github.com/krallin/tini/releases/download/v0.18.0/tini-static && \
     chmod +x /tini && \
     chown -R ambientum:ambientum /home/ambientum && \
+    chown -R ambientum:ambientum /scripts/start.sh && \
+    chmod +x /scripts/start.sh && \
     rm -rf /tmp/*
 
 # Define the running user
 USER ambientum
 
-# Add the ENTRYPOINT script
-ADD bashrc /home/ambientum/.bashrc
-
-
 # Application directory
 WORKDIR "/var/www/app"
 
-# Define the entry point that tries to enable newrelic
-ENTRYPOINT ["/tini", "--"]
+# Define the custom entry point.
+ENTRYPOINT ["/tini", "--", "/scripts/start.sh"]
 
 # As non daemon and single base image, it may be used as cli container
 CMD ["/bin/bash"]
+
+# default caching volumes.
+VOLUME /home/ambientum
