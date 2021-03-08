@@ -20,11 +20,7 @@ REPOSITORIES=$1
 
 # enable all repositories if any specified
 if [[ -z $REPOSITORIES ]]; then
-<<<<<<< HEAD
     REPOSITORIES="php node"
-=======
-    REPOSITORIES="mkcert php beanstalkd node"
->>>>>>> c6721781220df934050c733e1d6936b25b3aa4aa
 fi
 
 # for returning later to the main directory

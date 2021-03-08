@@ -1,8 +1,2 @@
-<<<<<<< HEAD
-TAGS="7.3 7.3-nginx 7.2 7.2-nginx 7.1 7.1-nginx latest-nginx"
-LATEST="7.3"
-#BASEUSER="sevenlive"
-=======
 TAGS="8.0 8.0-nginx 7.4 7.4-nginx 7.3 7.3-nginx latest-nginx"
 LATEST="8.0"
->>>>>>> c6721781220df934050c733e1d6936b25b3aa4aa

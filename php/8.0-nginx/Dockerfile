@@ -9,11 +9,7 @@
 #
 # Inspired by official PHP images.
 #
-<<<<<<< HEAD:php/7.2-nginx/Dockerfile
-FROM sevenlive/php:7.2
-=======
 FROM ambientum/php:8.0
->>>>>>> c6721781220df934050c733e1d6936b25b3aa4aa:php/8.0-nginx/Dockerfile
 
 # Repository/Image Maintainer
 LABEL maintainer="Diego Hernandes <iamhernandev@gmail.com>"
